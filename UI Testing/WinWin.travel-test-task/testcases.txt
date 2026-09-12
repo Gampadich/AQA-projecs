@@ -1,0 +1,31 @@
+Task 1: Test Cases (Header)
+
+TC-01: Verify Logo Redirection
+- Preconditions: User is on WinWin.travel.
+- Steps: Click on the "winwin.travel" logo in the header.
+- Expected Result: User is redirected to the main landing page, page refreshes successfully.
+
+TC-02: Verify "Get €2000 off" CTA Button
+- Preconditions: User is on the main page.
+- Steps: Click the orange "Get €2000 off" button.
+- Expected Result: Referral/discount promo modal opens.
+
+TC-03: Verify Navigation Icons Interaction
+- Preconditions: User is on the main page.
+- Steps: Click sequentially on the Share, Bell, Like, and Profile icons in the header.
+- Expected Result: Each icon responds appropriately (opens respective side-drawer, login popup, or notification menu).
+
+TC-04: Verify "Register" Flow Trigger
+- Preconditions: User is unauthorized.
+- Steps: Click the "Register" button.
+- Expected Result: Registration form modal opens.
+
+TC-05: Verify "Sign In" Flow Trigger
+- Preconditions: User is unauthorized.
+- Steps: Click the "Sign In" button.
+- Expected Result: Login form modal opens.
+
+TC-06: Verify Responsive Header Layout
+- Preconditions: DevTools mobile view enabled (e.g., iPhone 12).
+- Steps: Inspect the header component on lower screen resolutions.
+- Expected Result: Header resizes properly, icons/buttons scale or move into a hamburger menu without UI overlapping.
