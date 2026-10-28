@@ -1,0 +1,38 @@
+name: Run API Autotests & Allure Report
+
+# Робот запускається при кожному push або pull request у гілку main (або master)
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Скачуємо код твого репозиторію на сервер GitHub
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Збираємо Docker-образ із твого Dockerfile
+      - name: Build Docker Image
+        run: docker build -t api-tests .
+
+      # 3. Запускаємо тести в контейнері та зберігаємо allure-results
+      - name: Run Tests in Docker Container
+        run: docker run --name test-container api-tests
+
+      # 4. Копіюємо результати Allure з контейнера на сервер GitHub
+      - name: Copy Allure Results from Container
+        if: always() # Копіюємо навіть якщо тести впали (бо нам потрібен звіт про баги!)
+        run: docker cp test-container:/app/allure-results ./allure-results
+
+      # 5. Зберігаємо Allure-результати як ZIP-архів (Artifact) на GitHub
+      - name: Upload Allure Results Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
