@@ -1,0 +1,33 @@
+name: Run Restful-Booker API Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Збираємо Docker-образ із папки Restful-Booker
+      - name: Build Docker Image
+        run: docker build -t restful-booker-tests ./API-Testing/Restful-Booker
+
+      - name: Run Tests in Docker Container
+        run: docker run --name restful-container restful-booker-tests
+
+      - name: Copy Allure Results from Container
+        if: always()
+        run: docker cp restful-container:/app/allure-results ./allure-results
+
+      - name: Upload Allure Results Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-restful
+          path: allure-results
