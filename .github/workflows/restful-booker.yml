@@ -16,7 +16,7 @@ jobs:
 
       # Збираємо Docker-образ із папки Restful-Booker
       - name: Build Docker Image
-        run: docker build -t restful-booker-tests ./API-Testing/Restful-Booker
+        run: docker build -t restful-booker-tests ./API Testing/Restful-Booker
 
       - name: Run Tests in Docker Container
         run: docker run --name restful-container restful-booker-tests

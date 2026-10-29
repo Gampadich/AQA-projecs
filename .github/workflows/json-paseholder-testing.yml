@@ -14,7 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Вказуємо точний шлях до твого проєкту з Dockerfile всередині монорепозиторію
       - name: Build Docker Image
         run: docker build -t jsonplaceholder-tests ./API-Testing/AQA-JSONPlaceholder-testing
 
