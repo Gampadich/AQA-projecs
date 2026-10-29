@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker Image
-        run: docker build -f ./UI-Testing/AQA-saucedemo-testing/Dockerfile -t saucedemo-tests ./UI-Testing/AQA-saucedemo-testing
+        run: docker build -f UI-Testing/AQA-saucedemo-testing/Dockerfile -t saucedemo-tests .
 
       - name: Run UI Tests in Docker
         run: docker run --name saucedemo-container saucedemo-tests

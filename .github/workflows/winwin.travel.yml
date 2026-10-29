@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker Image
-        run: docker build -f ./UI-Testing/WinWin.travel-test-task/Dockerfile -t winwin-travel-tests ./UI-Testing/WinWin.travel-test-task
+        run: docker build -f UI-Testing/WinWin.travel-test-task/Dockerfile -t winwin-travel-tests .
 
       - name: Run UI Tests in Docker
         run: docker run --name winwin-container winwin-travel-tests
