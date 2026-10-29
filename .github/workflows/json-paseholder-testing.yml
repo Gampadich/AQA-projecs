@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Docker Image
-        run: docker build -t jsonplaceholder-tests ./API-Testing/AQA-JSONPlaceholder-testing
+        run: docker build -f ./API-Testing/AQA-JSONPlaceholder-testing/Dockerfile -t jsonplaceholder-tests ./API-Testing/AQA-JSONPlaceholder-testing
 
       - name: Run Tests in Docker Container
         run: docker run --name test-container jsonplaceholder-tests
