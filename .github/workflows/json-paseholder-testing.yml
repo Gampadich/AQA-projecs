@@ -16,7 +16,7 @@ jobs:
 
       # Збираємо образ, де контекст — це корінь репозиторію (.)
       - name: Build Docker Image
-        run: docker build -f API-Testing/AQA-JSONPlaceholder-testing/Dockerfile -t jsonplaceholder-tests .
+        run: docker build -f API Testing/AQA-JSONPlaceholder-testing/Dockerfile -t jsonplaceholder-tests .
 
       - name: Run Tests in Docker Container
         run: docker run --name test-container jsonplaceholder-tests
