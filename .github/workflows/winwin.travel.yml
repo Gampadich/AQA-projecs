@@ -1,0 +1,32 @@
+name: Run UI Tests (WinWin.travel)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t winwin-travel-tests ./UI Testing/WinWin.travel-test-task
+
+      - name: Run UI Tests in Docker
+        run: docker run --name winwin-container winwin-travel-tests
+
+      - name: Copy Allure Results
+        if: always()
+        run: docker cp winwin-container:/app/allure-results ./allure-results
+
+      - name: Upload Allure Results Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-winwin
+          path: allure-results
